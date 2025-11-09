@@ -86,7 +86,7 @@ add_action(
 			),
 			\WP\MCP\Infrastructure\ErrorHandling\ErrorLogMcpErrorHandler::class, // Error handler.
 			\WP\MCP\Infrastructure\Observability\NullMcpObservabilityHandler::class, // Observability handler.
-			$abilities,        // Abilities to expose as tools, registered in https://github.com/jonathanbossenger/wp-abilities-api-demo.
+			$abilities,        // Abilities to expose as tools
 			array(),           // Resources (optional).
 			array(),           // Prompts (optional).
 		);
