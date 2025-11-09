@@ -38,26 +38,16 @@ add_action(
 				'label'               => __( 'Get Post Count', 'wp-ability-mcp-test' ),
 				'description'         => __( 'Retrieves the total number of published posts.', 'wp-ability-mcp-test' ),
 				'category'            => 'site',
-				'input_schema'        => array(
-					'type'       => 'object',
-					'properties' => array(
-						'post_type' => array(
-							'type'        => 'string',
-							'description' => __( 'The post type to count.', 'wp-ability-mcp-test' ),
-							'default'     => 'post',
-						),
-					),
-				),
-				'output_schema'       => array(
-					'type'       => 'object',
-					'properties' => array(
-						'count' => array(
-							'type'        => 'integer',
-							'description' => __( 'The number of published posts.', 'wp-ability-mcp-test' ),
-						),
-					),
-				),
-				'execute_callback'    => 'wp_ability_mcp_test_get_post_count',
+                'input_schema'       => array(
+                    'type'       => 'string',
+                    'description' => __( 'The post type to count.', 'my-plugin' ),
+                    'default'     => 'post',
+                ),
+                'output_schema'      => array(
+                    'type'       => 'integer',
+                    'description' => __( 'The number of published posts.', 'my-plugin' ),
+                ),
+                'execute_callback'    => 'wp_ability_mcp_test_get_post_count',
 				'permission_callback' => function () {
 					return current_user_can( 'read' );
 				},
@@ -70,13 +60,11 @@ add_action(
  * Execute callback for get-post-count ability.
  */
 function wp_ability_mcp_test_get_post_count( $input ) {
-    $post_type = $input['post_type'] ?? 'post';
+    $post_type = $input ?? 'post';
 
     $count = wp_count_posts( $post_type );
 
-    return array(
-            'count' => (int) $count->publish,
-    );
+    return (int) $count->publish;
 }
 
 
